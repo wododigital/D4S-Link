@@ -469,11 +469,16 @@ export function registerLabsTools(server: McpServer): void {
     TOOL_ANNOTATIONS,
     async (params) => {
       try {
-        const { target1, target2, ...rest } = params;
+        const { target1, target2, intersections, ignore_synonyms, ...rest } = params;
         const body = buildBody({
           targets: { "1": target1, "2": target2 },
+          intersections,
+          ignore_synonyms,
           ...rest,
         });
+        // Remove target1/target2 if they leaked into body
+        delete body.target1;
+        delete body.target2;
         const result = await dfsPost(
           "/dataforseo_labs/google/domain_intersection/live",
           [body]
