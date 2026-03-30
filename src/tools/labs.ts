@@ -469,16 +469,19 @@ export function registerLabsTools(server: McpServer): void {
     TOOL_ANNOTATIONS,
     async (params) => {
       try {
-        const { target1, target2, intersections, ignore_synonyms, ...rest } = params;
-        const body = buildBody({
-          targets: { "1": target1, "2": target2 },
-          intersections,
-          ignore_synonyms,
-          ...rest,
-        });
-        // Remove target1/target2 if they leaked into body
-        delete body.target1;
-        delete body.target2;
+        const body: Record<string, unknown> = {
+          targets: { "1": params.target1, "2": params.target2 },
+        };
+        if (params.intersections !== undefined) body.intersections = params.intersections;
+        if (params.ignore_synonyms !== undefined) body.ignore_synonyms = params.ignore_synonyms;
+        if (params.language_code !== undefined) body.language_code = params.language_code;
+        if (params.location_name !== undefined) body.location_name = params.location_name;
+        if (params.limit !== undefined) body.limit = params.limit;
+        if (params.offset !== undefined) body.offset = params.offset;
+        if (params.order_by !== undefined) body.order_by = params.order_by;
+        if (params.filters !== undefined) body.filters = params.filters;
+        if (params.include_clickstream_data !== undefined) body.include_clickstream_data = params.include_clickstream_data;
+        if (params.item_types !== undefined) body.item_types = params.item_types;
         const result = await dfsPost(
           "/dataforseo_labs/google/domain_intersection/live",
           [body]
