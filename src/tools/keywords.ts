@@ -21,7 +21,7 @@ export function registerKeywordTools(server: McpServer): void {
         if (language_code !== undefined && language_code !== null) {
           body.language_code = language_code;
         }
-        const result = await dfsPost("/v3/keywords_data/google_ads/search_volume/live", [body]);
+        const result = await dfsPost("/keywords_data/google_ads/search_volume/live", [body]);
         return toolResult(result);
       } catch (e) {
         return handleToolError(e);
@@ -45,7 +45,7 @@ export function registerKeywordTools(server: McpServer): void {
         params.set("country_iso_code", country_iso_code);
         if (location_name !== undefined) params.set("location_name", location_name);
         if (location_type !== undefined) params.set("location_type", location_type);
-        const result = await dfsGet(`/v3/keywords_data/google_ads/locations?${params.toString()}`);
+        const result = await dfsGet(`/keywords_data/google_ads/locations?${params.toString()}`);
         return toolResult(result);
       } catch (e) {
         return handleToolError(e);
@@ -80,7 +80,7 @@ export function registerKeywordTools(server: McpServer): void {
         if (location_name !== undefined && location_name !== null) body.location_name = location_name;
         if (language_code !== undefined && language_code !== null) body.language_code = language_code;
         if (category_code !== undefined && category_code !== null) body.category_code = category_code;
-        const result = await dfsPost("/v3/keywords_data/google_trends/explore/live", [body]);
+        const result = await dfsPost("/keywords_data/google_trends/explore/live", [body]);
         return toolResult(result);
       } catch (e) {
         return handleToolError(e);
@@ -96,7 +96,7 @@ export function registerKeywordTools(server: McpServer): void {
     TOOL_ANNOTATIONS,
     async () => {
       try {
-        const result = await dfsGet("/v3/keywords_data/google_trends/categories");
+        const result = await dfsGet("/keywords_data/google_trends/categories");
         return toolResult(result);
       } catch (e) {
         return handleToolError(e);
@@ -147,7 +147,7 @@ export function registerKeywordTools(server: McpServer): void {
     async (params) => {
       try {
         const body = buildDfsTrendsBody(params);
-        const result = await dfsPost("/v3/keywords_data/dataforseo_trends/explore/live", [body]);
+        const result = await dfsPost("/keywords_data/dataforseo_trends/explore/live", [body]);
         return toolResult(result);
       } catch (e) {
         return handleToolError(e);
@@ -164,7 +164,7 @@ export function registerKeywordTools(server: McpServer): void {
     async (params) => {
       try {
         const body = buildDfsTrendsBody(params);
-        const result = await dfsPost("/v3/keywords_data/dataforseo_trends/demography/live", [body]);
+        const result = await dfsPost("/keywords_data/dataforseo_trends/demography/live", [body]);
         return toolResult(result);
       } catch (e) {
         return handleToolError(e);
@@ -181,7 +181,7 @@ export function registerKeywordTools(server: McpServer): void {
     async (params) => {
       try {
         const body = buildDfsTrendsBody(params);
-        const result = await dfsPost("/v3/keywords_data/dataforseo_trends/subregion_interests/live", [body]);
+        const result = await dfsPost("/keywords_data/dataforseo_trends/subregion_interests/live", [body]);
         return toolResult(result);
       } catch (e) {
         return handleToolError(e);

@@ -82,7 +82,7 @@ export function registerSerpTools(server: McpServer): void {
           people_also_ask_click_depth,
         });
         const result = await dfsPost(
-          `/v3/serp/${search_engine}/organic/live/advanced`,
+          `/serp/${search_engine}/organic/live/advanced`,
           [body as Record<string, unknown>]
         );
         return toolResult(result);
@@ -123,7 +123,7 @@ export function registerSerpTools(server: McpServer): void {
         if (location_type) params.set("location_type", location_type);
 
         const result = await dfsGet(
-          `/v3/serp/${search_engine}/locations?${params.toString()}`
+          `/serp/${search_engine}/locations?${params.toString()}`
         );
         return toolResult(result);
       } catch (e) {
@@ -170,7 +170,7 @@ export function registerSerpTools(server: McpServer): void {
           os,
         });
         const result = await dfsPost(
-          "/v3/serp/youtube/organic/live/advanced",
+          "/serp/youtube/organic/live/advanced",
           [body as Record<string, unknown>]
         );
         return toolResult(result);
@@ -211,7 +211,7 @@ export function registerSerpTools(server: McpServer): void {
           os,
         });
         const result = await dfsPost(
-          "/v3/serp/youtube/video_info/live/advanced",
+          "/serp/youtube/video_info/live/advanced",
           [body as Record<string, unknown>]
         );
         return toolResult(result);
@@ -259,7 +259,7 @@ export function registerSerpTools(server: McpServer): void {
           os,
         });
         const result = await dfsPost(
-          "/v3/serp/youtube/video_comments/live/advanced",
+          "/serp/youtube/video_comments/live/advanced",
           [body as Record<string, unknown>]
         );
         return toolResult(result);
@@ -318,7 +318,7 @@ export function registerSerpTools(server: McpServer): void {
           os,
         });
         const result = await dfsPost(
-          "/v3/serp/youtube/video_subtitles/live/advanced",
+          "/serp/youtube/video_subtitles/live/advanced",
           [body as Record<string, unknown>]
         );
         return toolResult(result);
@@ -354,7 +354,7 @@ export function registerSerpTools(server: McpServer): void {
         if (location_type) params.set("location_type", location_type);
 
         const result = await dfsGet(
-          `/v3/serp/youtube/locations?${params.toString()}`
+          `/serp/youtube/locations?${params.toString()}`
         );
         return toolResult(result);
       } catch (e) {
