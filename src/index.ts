@@ -7,21 +7,23 @@ import { registerKeywordTools } from "./tools/keywords.js";
 import { registerLabsTools } from "./tools/labs.js";
 import { registerBacklinksTools } from "./tools/backlinks.js";
 
-const server = new McpServer({
-  name: "dataforseo-mcp-server",
-  version: "1.0.0",
-});
-
-// Register all 55+ tools
-registerSerpTools(server);
-registerKeywordTools(server);
-registerLabsTools(server);
-registerBacklinksTools(server);
+function createServer() {
+  const server = new McpServer({
+    name: "dataforseo-mcp-server",
+    version: "1.0.0",
+  });
+  registerSerpTools(server);
+  registerKeywordTools(server);
+  registerLabsTools(server);
+  registerBacklinksTools(server);
+  return server;
+}
 
 const app = express();
 app.use(express.json());
 
 app.post("/mcp", async (req, res) => {
+  const server = createServer();
   const transport = new StreamableHTTPServerTransport({
     sessionIdGenerator: undefined,
     enableJsonResponse: true,
